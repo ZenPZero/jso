@@ -33,9 +33,7 @@ impl Display for Error {
     match self {
       UnexpectedEof => write!(f, "unexpected end of file"),
 
-      UnexpectedChar(i, c) => {
-        write!(f, "unexpected character {c:?} at index {i}")
-      }
+      UnexpectedChar(i, c) => write!(f, "unexpected character {c:?} at index {i}"),
 
       InvalidNum(err) => write!(f, "invalid number: {err}"),
     }
@@ -138,10 +136,11 @@ pub fn num(chars: &mut Peekable<Enumerate<Chars>>) -> Result {
 }
 
 /// Parses a json string, disregarding whitespace
+///
 /// <div class="warning">
 ///
-/// This function returns a [`String`] rather than a [`Val`] so it can be used
-/// to parse both string values and object keys
+/// This function returns a [`String`] rather than a [`Val`] so it can be used to parse both string
+/// values and object keys
 ///
 /// </div>
 pub fn str(chars: &mut Peekable<Enumerate<Chars>>) -> Result<String> {
