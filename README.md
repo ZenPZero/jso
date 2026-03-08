@@ -3,7 +3,7 @@
 No-BS, no-bloat json library.
 
 [crates.io](https://crates.io/crates/jso) |
-[API Docs (docs.rs)](https://docs.rs/jso/latest/jso) |
+[API Docs (docs.rs)](https://docs.rs/jso) |
 [Changelog](CHANGELOG.md) |
 [License](LICENSE)
 
@@ -14,7 +14,7 @@ No-BS, no-bloat json library.
 ## Installation
 
 ```shell
-cargo add jso@=1.1.0
+cargo add jso@=1.2.0
 ```
 
 or
@@ -23,14 +23,14 @@ or
 
 ```toml
 [dependencies]
-jso = "=1.1.0"
+jso = "=1.2.0"
 ```
 
 or
 
 ```toml
 [dependencies.jso]
-version = "=1.1.0"
+version = "=1.2.0"
 ```
 
 ## Examples

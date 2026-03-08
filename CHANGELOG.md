@@ -1,3 +1,8 @@
+# 1.2.0 (Mar 7 2026)
+
+- Implemented `std::fmt::Display` for `parse::Error`
+- Implemented `std::error::Error` for `parse::Error`
+
 # 1.1.0 (Jul 27 2025) (imported Jan 23 2026)
 
 - Added `Val.{is,unwrap,as}_{null,bool,num,str,arr,obj}()`

@@ -3,6 +3,7 @@
 
 use std::{
   collections::HashMap,
+  fmt::{self, Display},
   iter::{Enumerate, Peekable},
   num::ParseFloatError,
   str::Chars,
@@ -25,6 +26,30 @@ pub enum Error {
   UnexpectedChar(usize, char),
   /// Encountered an invalid number
   InvalidNum(ParseFloatError),
+}
+
+impl Display for Error {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    match self {
+      UnexpectedEof => write!(f, "unexpected end of file"),
+
+      UnexpectedChar(i, c) => {
+        write!(f, "unexpected character {c:?} at index {i}")
+      }
+
+      InvalidNum(err) => write!(f, "invalid number: {err}"),
+    }
+  }
+}
+
+impl std::error::Error for Error {
+  fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+    match self {
+      InvalidNum(err) => Some(err),
+
+      _ => None,
+    }
+  }
 }
 
 /// Parses a json value, disregarding whitespace
