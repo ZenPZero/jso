@@ -1,6 +1,6 @@
 use std::{
   collections::HashMap,
-  fmt::{self, Display},
+  fmt::{self, Display, Write},
   ops::Index,
 };
 
@@ -12,38 +12,55 @@ use crate::{
 impl Display for Val {
   fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
     match self {
-      Null => write!(f, "null"),
+      Null => f.write_str("null"),
       Bool(b) => write!(f, "{b}"),
       Num(n) => write!(f, "{n}"),
-      Str(s) => write!(f, r#""{s}""#),
+      Str(s) => escape_str(f, s),
 
       Arr(a) => {
-        write!(f, "[")?;
-        write!(
-          f,
-          "{}",
-          a.iter()
-            .map(ToString::to_string)
-            .collect::<Vec<_>>()
-            .join(",")
-        )?;
-        write!(f, "]")
+        f.write_char('[')?;
+        for (i, v) in a.iter().enumerate() {
+          if i > 0 {
+            f.write_char(',')?;
+          }
+          write!(f, "{v}")?;
+        }
+        f.write_char(']')
       }
 
       Obj(o) => {
-        write!(f, "{{")?;
-        write!(
-          f,
-          "{}",
-          o.iter()
-            .map(|(k, v)| format!(r#""{k}":{v}"#))
-            .collect::<Vec<_>>()
-            .join(",")
-        )?;
-        write!(f, "}}")
+        f.write_char('{')?;
+        for (i, (k, v)) in o.iter().enumerate() {
+          if i > 0 {
+            f.write_char(',')?;
+          }
+          escape_str(f, k)?;
+          write!(f, ":{v}")?;
+        }
+        f.write_char('}')
       }
     }
   }
+}
+
+fn escape_str(f: &mut fmt::Formatter, s: &str) -> fmt::Result {
+  f.write_char('"')?;
+  for c in s.chars() {
+    match c {
+      '"' => f.write_str("\\\"")?,
+      '\\' => f.write_str("\\\\")?,
+      '\x08' => f.write_str("\\b")?,
+      '\x0c' => f.write_str("\\f")?,
+      '\n' => f.write_str("\\n")?,
+      '\r' => f.write_str("\\r")?,
+      '\t' => f.write_str("\\t")?,
+
+      c if c.is_control() => write!(f, "\\u{:04x}", c as u32)?,
+
+      _ => f.write_char(c)?,
+    }
+  }
+  f.write_char('"')
 }
 
 impl Index<&str> for Val {

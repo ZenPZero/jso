@@ -1,3 +1,8 @@
+# 1.3.1 (Mar 14 2026)
+
+- `Val`'s `Display` impl now escapes strings and object keys
+- Optimized `Val`'s `Display` impl to reduce allocations and improve speed
+
 # 1.3.0 (Mar 14 2026)
 
 - Added escape support to `parse::str()`
