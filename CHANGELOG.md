@@ -1,3 +1,8 @@
+# 1.3.0 (Mar 14 2026)
+
+- Added escape support to `parse::str()`
+  - Unicode escapes (`\uXXXX`) not yet supported
+
 # 1.2.0 (Mar 7 2026)
 
 - Implemented `std::fmt::Display` for `parse::Error`

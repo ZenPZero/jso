@@ -120,6 +120,21 @@ fn str() {
   fail!(
     "\"" => UnexpectedEof
   );
+
+  pass!(
+    "\" test \\\" \"" => Str(" test \" ".into())
+    "\" test \\\\ \"" => Str(" test \\ ".into())
+    "\" test \\b \"" => Str(" test \x08 ".into())
+    "\" test \\f \"" => Str(" test \x0c ".into())
+    "\" test \\n \"" => Str(" test \n ".into())
+    "\" test \\r \"" => Str(" test \r ".into())
+    "\" test \\t \"" => Str(" test \t ".into())
+  );
+
+  // @todo(unicode-escapes)
+  fail!(
+    "\" \\u1234 \"" => UnexpectedChar(3, 'u')
+  );
 }
 
 // @todo Arr Obj

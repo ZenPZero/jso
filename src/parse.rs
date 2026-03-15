@@ -152,6 +152,20 @@ pub fn str(chars: &mut Peekable<Enumerate<Chars>>) -> Result<String> {
     match chars.next() {
       Some((_, '"')) => break,
 
+      Some((_, '\\')) => match chars.next() {
+        Some((_, '"')) => s.push('"'),
+        Some((_, '\\')) => s.push('\\'),
+        Some((_, '/')) => s.push('/'),
+        Some((_, 'b')) => s.push('\x08'),
+        Some((_, 'f')) => s.push('\x0c'),
+        Some((_, 'n')) => s.push('\n'),
+        Some((_, 'r')) => s.push('\r'),
+        Some((_, 't')) => s.push('\t'),
+        // @todo(unicode-escapes) u
+        Some((i, c)) => return Err(UnexpectedChar(i, c)),
+        None => return Err(UnexpectedEof),
+      },
+
       Some((_, c)) => s.push(c),
 
       None => return Err(UnexpectedEof),
