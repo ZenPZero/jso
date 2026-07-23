@@ -1,13 +1,14 @@
 //! This module contains functions for parsing json.\
 //! See [`val()`] and [`Error`]
 
-use std::{
-  collections::HashMap,
+use core::{
   fmt::{self, Display},
   iter::{Enumerate, Peekable},
   num::ParseFloatError,
   str::Chars,
 };
+
+use crate::{Map, String, Vec};
 
 use crate::Val::{self, *};
 
@@ -15,7 +16,7 @@ use Error::*;
 
 /// Return type of all parsing functions except [`str()`] which returns
 /// <code>[Result]<[String]></code>
-pub type Result<T = Val, E = Error> = std::result::Result<T, E>;
+pub type Result<T = Val, E = Error> = core::result::Result<T, E>;
 
 /// A json parsing error
 #[derive(Debug, PartialEq, Eq)]
@@ -40,8 +41,8 @@ impl Display for Error {
   }
 }
 
-impl std::error::Error for Error {
-  fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+impl core::error::Error for Error {
+  fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
     match self {
       InvalidNum(err) => Some(err),
 
@@ -204,7 +205,7 @@ pub fn arr(chars: &mut Peekable<Enumerate<Chars>>) -> Result {
 
 /// Parses a json object value, disregarding whitespace
 pub fn obj(chars: &mut Peekable<Enumerate<Chars>>) -> Result {
-  let mut obj = HashMap::new();
+  let mut obj = Map::new();
 
   expect!(chars.next() => '{');
   loop {

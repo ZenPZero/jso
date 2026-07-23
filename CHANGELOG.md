@@ -1,3 +1,10 @@
+# 1.4.0 (Jul 23 2026)
+
+- Added `#![no_std]` support under the `std` feature flag
+  * The feature is enabled by default
+  * `Val::Obj` now uses `alloc::collections::btree_map::BTreeMap` instead of `std::collections::HashMap` when the feature is disabled
+  * The map type is abstracted behind the exported `Map` type alias at the crate root
+
 # 1.3.1 (Mar 14 2026)
 
 - `Val`'s `Display` impl now escapes strings and object keys

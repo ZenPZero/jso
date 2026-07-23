@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use crate::{Map, String, Vec};
 
 /// Core json type
 #[expect(missing_docs)]
@@ -10,5 +10,5 @@ pub enum Val {
   Num(f64),
   Str(String),
   Arr(Vec<Self>),
-  Obj(HashMap<String, Self>),
+  Obj(Map<String, Self>),
 }

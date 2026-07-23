@@ -1,3 +1,7 @@
+use alloc::vec;
+
+use crate::{Map, String};
+
 use crate::Val;
 
 macro_rules! case_fn {
@@ -44,8 +48,7 @@ fn is_() {
       [("a", 1), ("b", 2), ("c", 3)],
       [("this", "is"), ("an", "object")],
       {
-        use std::collections::HashMap;
-        let mut h = HashMap::new();
+        let mut h = Map::new();
         h.insert("and", "so");
         h.insert("is", "this");
         h
@@ -98,8 +101,7 @@ fn unwrap_() {
       [("a", 1), ("b", 2), ("c", 3)],
       [("this", "is"), ("an", "object")],
       {
-        use std::collections::HashMap;
-        let mut h = HashMap::new();
+        let mut h = Map::new();
         h.insert("and", "so");
         h.insert("is", "this");
         h

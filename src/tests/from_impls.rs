@@ -1,3 +1,5 @@
+use crate::ToString;
+
 use crate::Val::{self, *};
 
 macro_rules! case {

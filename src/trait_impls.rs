@@ -1,8 +1,9 @@
-use std::{
-  collections::HashMap,
+use core::{
   fmt::{self, Display, Write},
   ops::Index,
 };
+
+use crate::{Map, String, Vec};
 
 use crate::{
   Unwrap,
@@ -95,5 +96,5 @@ impl_unwrap_trait!(
   unwrap_num f64
   unwrap_str String
   unwrap_arr Vec<Self>
-  unwrap_obj HashMap<String, Self>
+  unwrap_obj Map<String, Self>
 );

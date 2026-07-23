@@ -1,4 +1,6 @@
-use std::{collections::HashMap, convert::Into};
+use core::convert::Into;
+
+use crate::{Map, String, ToString, Vec};
 
 use crate::Val::{self, *};
 
@@ -77,13 +79,13 @@ where
   }
 }
 
-// covers HashMap<String, Val>
-impl<K, V> From<HashMap<K, V>> for Val
+// covers Map<String, Val>
+impl<K, V> From<Map<K, V>> for Val
 where
   K: Into<String>,
   V: Into<Self>,
 {
-  fn from(o: HashMap<K, V>) -> Self {
+  fn from(o: Map<K, V>) -> Self {
     Obj(o.into_iter().map(|(k, v)| (k.into(), v.into())).collect())
   }
 }

@@ -14,7 +14,7 @@ No-BS, no-bloat json library.
 ## Installation
 
 ```shell
-cargo add jso@=1.3.1
+cargo add jso@=1.4.0
 ```
 
 or
@@ -23,14 +23,14 @@ or
 
 ```toml
 [dependencies]
-jso = "=1.3.1"
+jso = "=1.4.0"
 ```
 
 or
 
 ```toml
 [dependencies.jso]
-version = "=1.3.1"
+version = "=1.4.0"
 ```
 
 ## Examples

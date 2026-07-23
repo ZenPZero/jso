@@ -1,12 +1,17 @@
 [package]
 name = "jso"
-version = "1.3.1"
+version = "1.4.0"
 edition = "2024"
 
 description = "No-BS, no-bloat json library."
-keywords = ["json", "parsing"]
-categories = ["encoding", "parser-implementations"]
+keywords = ["json", "parsing", "serialization"]
+categories = ["encoding", "parser-implementations", "no-std"]
 license = "GPL-3.0-only"
 repository = "https://github.com/ZenPZero/jso"
 
 include = ["src/", "examples/", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[features]
+default = ["std"]
+
+std = []

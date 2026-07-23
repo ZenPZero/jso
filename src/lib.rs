@@ -1,3 +1,4 @@
+#![no_std]
 #![warn(missing_docs)]
 
 //! # Example
@@ -10,6 +11,22 @@
 //! assert_eq!(obj["Hello"], "World".into());
 //! println!("{obj}");
 //! ```
+
+extern crate alloc;
+#[cfg(feature = "std")]
+extern crate std;
+
+use alloc::{
+  string::{String, ToString},
+  vec::Vec,
+};
+
+#[cfg(not(feature = "std"))]
+#[expect(missing_docs)]
+pub type Map<K, V> = alloc::collections::BTreeMap<K, V>;
+#[cfg(feature = "std")]
+#[expect(missing_docs)]
+pub type Map<K, V> = std::collections::HashMap<K, V>;
 
 #[cfg(test)]
 mod tests;

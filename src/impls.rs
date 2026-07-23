@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use crate::{Map, String, Vec};
 
 use crate::Val::{self, *};
 
@@ -122,7 +122,7 @@ impl Val {
     unwrap_num Num f64
     unwrap_str Str String
     unwrap_arr Arr Vec<Self>
-    unwrap_obj Obj HashMap<String, Self>
+    unwrap_obj Obj Map<String, Self>
   );
 
   #[expect(missing_docs)]
@@ -136,7 +136,7 @@ impl Val {
     as_num Num f64
     as_str Str String
     as_arr Arr Vec<Self>
-    as_obj Obj HashMap<String, Self>
+    as_obj Obj Map<String, Self>
   );
 
   #[expect(missing_docs)]
@@ -150,6 +150,6 @@ impl Val {
     num Num f64
     str Str String
     arr Arr Vec<Self>
-    obj Obj HashMap<String, Self>
+    obj Obj Map<String, Self>
   );
 }
