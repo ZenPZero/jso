@@ -1,3 +1,7 @@
+# ⚠️ [MOVED TO CODEBERG] https://codeberg.org/ZenPZero/jso
+
+---
+
 # jso <!-- omit from toc -->
 
 No-BS, no-bloat json library.
